@@ -1,35 +1,42 @@
 import express from 'express';
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
-
 const app = express();
-const PORT = 3000;
 
-app.use(express.json())
-
-// Get __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Request parameters
-app.get("/users/:user", (req, res) => {
-    const user = req.params.user;
-    res.status(200).sendFile(path.join(__dirname, `${user}.html`))
+// req.url returns the url of the request
+// req.ip returns the ip of the client (frontend)
+// req.headers returns the headers of the request
+app.get("/", (req, res) => {
+    console.log(req.url);
+    console.log(req.ip);
+    console.log(req.headers);
+    res.status(200).send("Hello World");
 })
 
-// Request IP
-app.get("/", (req, res) => {
-    res.status(200).json(`You are accessing the page from ${req.ip}`);
-});
 
-// Request body : incoming data from the client should be converted to JS object
-// using app.use(express.json()) or app.use(express.urlencoded()) middleware
+// req.params.page returns whatever is in the place of :page
+// this is called dynamic routing where the request is dynamically generated
+app.get("/dynamicpage/:page", (req, res) => {
+    console.log(req.params.page);
+    res.status(200).send(`You are on page ${req.params.page}`);
+})
+
+
+// req.body returns the form data from the frontend
+// we need to use app.use(express.urlencoded()) and app.use(express.json()) to parse the form data
+/* 
+to test, we should create a form with method="post" in the frontend, with action="http://localhost:3000/register"
+
+OR
+
+initiate a POSTMAN request -> set method to POST -> set url to http://localhost:3000/register
+-> set body to x-www-form-urlencoded -> provide keys and values for data and click send
+*/
+app.use(express.urlencoded());
+app.use(express.json());
 app.post("/register", (req, res) => {
-    const {username, password } = req.body;
-    res.status(200).json({ username, password });
-});
+    console.log(req.body);
+    res.status(200).send("User registered");
+})
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(3000, () => {
+    console.log('Server started on port 3000');
 });

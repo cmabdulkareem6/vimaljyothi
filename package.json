@@ -1,0 +1,22 @@
+{
+  "name": "vimal-jyothi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmabdulkareem6/vimaljyothi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/cmabdulkareem6/vimaljyothi/issues"
+  },
+  "homepage": "https://github.com/cmabdulkareem6/vimaljyothi#readme"
+}

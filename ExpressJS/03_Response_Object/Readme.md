@@ -23,9 +23,6 @@ app.get("/offers", (req, res) => {
 ```
 * For sending files using path.join(__dirname, "contact.html") we should write following code in the start of the index.js file
 ```
-import { fileURLToPath } from 'url';
-import path, {dirname} from 'path';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import path from 'path';
 ```
 5. As all above requests are GET requests, we can test them using any browser.
